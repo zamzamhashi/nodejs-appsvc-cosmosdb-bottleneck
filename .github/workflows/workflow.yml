@@ -5,34 +5,33 @@ name: Sample App load test
 # Controls when the workflow will run
 on:
   push:
-      branches:
-        - main
+    branches:
+      - main
 
 env:
-  LOAD_TEST_RESOURCE: "eastloadtest"
-  LOAD_TEST_RESOURCE_GROUP: "loadtest-rg"
-  ENDPOINT_URL: "jjsampleapp.azurewebsites.net"
+  LOAD_TEST_RESOURCE: "nlzamzam22"
+  LOAD_TEST_RESOURCE_GROUP: "nlzamzam22eastus-rg"
+  ENDPOINT_URL: "nlzamzam22.azurewebsites.net/"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
   loadTest:
     name: Load Test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout GitHub Actions 
+      - name: Checkout GitHub Actions
         uses: actions/checkout@v2
-          
+
       - name: Login to Azure
         uses: azure/login@v1
         continue-on-error: false
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
-      - name: 'Azure Load Testing'
+
+      - name: "Azure Load Testing"
         uses: azure/load-testing@v1
         with:
-          loadTestConfigFile: 'SampleApp.yaml'
+          loadTestConfigFile: "SampleApp.yaml"
           loadTestResource: ${{ env.LOAD_TEST_RESOURCE }}
           resourceGroup: ${{ env.LOAD_TEST_RESOURCE_GROUP }}
           env: |
